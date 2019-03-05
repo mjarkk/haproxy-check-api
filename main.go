@@ -47,7 +47,11 @@ func main() {
 
 // Validate validates the config using haproxy
 func Validate(config string) error {
-	data := []byte(ParseConf(config))
+	parsedConf, err := ParseConf(config)
+	if err != nil {
+		return err
+	}
+	data := []byte(parsedConf)
 
 	tmpfile, err := ioutil.TempFile(os.TempDir(), "haproxyConf")
 	if err != nil {
@@ -78,7 +82,7 @@ func Validate(config string) error {
 }
 
 // ParseConf replaces groups and missing keys
-func ParseConf(config string) string {
+func ParseConf(config string) (string, error) {
 	lines := strings.Split(config, "\n")
 	out := ""
 
@@ -120,7 +124,6 @@ func ParseConf(config string) string {
 					line = strings.Replace(line, match[1], "/etc/certs/fullKey.pem", 1)
 				}
 			}
-
 		}
 
 		extra := "\n"
@@ -130,7 +133,7 @@ func ParseConf(config string) string {
 		out = out + extra + line
 	}
 
-	return out
+	return out, nil
 }
 
 // FullMatch matches a string with a regex
