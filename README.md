@@ -11,7 +11,7 @@ $ docker build --no-cache --tag haproxy-check-api:latest .
 
 ## *2* Run
 ```
-$ docker run --restart always -d -p 8223:8223 haproxy-check-api
+$ docker run --restart always --name haproxyCheckApi -d -p 8223:8223 haproxy-check-api
 ```
 
 ## *3* Usage
