@@ -2,15 +2,16 @@
 A small docker container just for checking if a haproxy config doesn't contains errors
 
 ## *1* Setup
-**Make sure you have installed Docker and GoLang**
+**Make sure you have installed Docker**
 ```
-$ git clone https://github.com/mjarkk/haproxy-check-api && cd haproxy-check-api/
-$ go build && docker build --no-cache --tag haproxy-check-api:latest .
+$ wget https://github.com/mjarkk/haproxy-check-api/releases/download/0.1/release.zip
+$ unzip release.zip
+$ docker build --no-cache --tag haproxy-check-api:latest .
 ```
 
 ## *2* Run
 ```
-$ docker run -d -p 8223:8223 haproxy-check-api
+$ docker run --restart always -d -p 8223:8223 haproxy-check-api
 ```
 
 ## *3* Usage
