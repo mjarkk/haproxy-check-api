@@ -6,13 +6,23 @@ import (
 	"io/ioutil"
 	"os"
 	"os/exec"
+	"os/signal"
 	"regexp"
 	"strings"
+	"syscall"
 
 	"github.com/gin-gonic/gin"
 )
 
 func main() {
+	// Listen for kill commandos
+	go func() {
+		s := make(chan os.Signal, 1)
+		signal.Notify(s, syscall.SIGINT, syscall.SIGTERM, os.Interrupt, os.Kill, syscall.SIGKILL)
+		<-s
+		os.Exit(0)
+	}()
+
 	gin.SetMode(gin.ReleaseMode)
 
 	r := gin.Default()
@@ -109,7 +119,7 @@ func ParseConf(config string) (string, error) {
 		}
 
 		if currentSection == "frontend" {
-			certMatched := FullMatch(`^\s*bind\s+.{0,50}ssl\s+crt\s+(.+\.(pem|cer))`, line)
+			certMatched := FullMatch(`^\s*bind\s+.{0,50}ssl\s+crt\s+((\/|\w|\d|\.|\\ )+)`, line)
 			for _, match := range certMatched {
 				if len(match) >= 2 {
 					line = strings.Replace(line, match[1], "/etc/certs/fullKey.pem", 1)
