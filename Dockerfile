@@ -25,7 +25,7 @@ RUN GOOS=linux GARCH=amd64 CGO_ENABLED=0 go build -v -a -installsuffix cgo
 
 
 # Build the api container
-FROM haproxy:1.9
+FROM haproxy:2.0.1
 
 # Copy over the binary
 COPY --from=build /go/src/github.com/mjarkk/haproxy-check-api/haproxy-check-api /haproxy-check-api
