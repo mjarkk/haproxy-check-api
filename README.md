@@ -4,7 +4,7 @@ A small docker container just for checking if a haproxy config doesn't contains 
 ## *1* Setup
 **Make sure you have installed Docker**
 ```
-$ wget https://github.com/mjarkk/haproxy-check-api/releases/download/0.2/haproxy-check-api.tar
+$ wget https://github.com/mjarkk/haproxy-check-api/releases/download/0.3/haproxy-check-api.tar
 $ docker load < haproxy-check-api.tar
 ```
 
