@@ -1,19 +1,12 @@
 # `haproxy-check-api` - A api to check haproxy configs
 A small docker container just for checking if a haproxy config doesn't contains errors
 
-## *1* Setup
-**Make sure you have installed Docker**
-```
-$ wget https://github.com/mjarkk/haproxy-check-api/releases/download/0.3/haproxy-check-api.tar
-$ docker load < haproxy-check-api.tar
-```
-
-## *2* Run
+## Run
 ```
 $ docker run --restart always --name haproxyCheckApi -d -p 8223:8223 haproxy-check-api
 ```
 
-## *3* Usage
+## Usage
 ```
 $ curl -X POST http://localhost:8223/checkHaProxy -F "file=@./haproxyConfig.cfg" -H "Content-Type: multipart/form-data"
 ```
