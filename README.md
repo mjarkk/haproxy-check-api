@@ -1,6 +1,11 @@
 # `haproxy-check-api` - A api to check haproxy configs
 A small docker container just for checking if a haproxy config doesn't contains errors
 
+## Get
+```
+docker pull mjarkk/haproxy-check-api
+```
+
 ## Run
 ```
 $ docker run --restart always --name haproxyCheckApi -d -p 8223:8223 haproxy-check-api
